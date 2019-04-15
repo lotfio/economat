@@ -21,4 +21,19 @@ class Panel extends CI_Controller {
 		$this->load->view('template/foot');
 		$this->load->view('template/footer');
 	}
+
+
+	public function account()
+	{
+
+		$data['title'] = "PANEL";
+		$data['user'] = $this->session->logged;
+
+		$this->load->view('template/header', $data);
+		$this->load->view('template/navbar', $data);
+		$this->load->view('template/sidebar', $data);
+		$this->load->view('panel/account');
+		$this->load->view('template/foot');
+		$this->load->view('template/footer');
+	}
 }

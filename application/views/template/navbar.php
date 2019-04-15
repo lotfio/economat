@@ -103,9 +103,9 @@ John Abraham</span>is now following you
                             <div class="dropdown-menu dropdown-menu-right nav-user-dropdown" aria-labelledby="navbarDropdownMenuLink2">
                                 <div class="nav-user-info">
                                 <h5 class="mb-0 text-white nav-user-name"><?=ucfirst($user->u_name)?></h5>
-                                    <span class="status"></span><span class="ml-2">Available</span>
+                                    <span class="status"></span><span class="ml-2"><?=($user->u_level == 1) ? 'Administrator' : 'Manager'?></span>
                                 </div>
-                                <a class="dropdown-item" href="#"><i class="fas fa-user mr-2"></i>Account</a>
+                                <a class="dropdown-item" href="<?=base_url()?>panel/account"><i class="fas fa-user mr-2"></i>Account</a>
                                 <a class="dropdown-item" href="#"><i class="fas fa-cog mr-2"></i>Setting</a>
                                 <a class="dropdown-item" href="<?=base_url()?>login/logout"><i class="fas fa-power-off mr-2"></i>Logout</a>
                             </div>

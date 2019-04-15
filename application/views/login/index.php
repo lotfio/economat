@@ -49,7 +49,7 @@
                     <?php } ?>
 
                     <div class="form-group">
-                        <input name="u_email" class="form-control form-control-lg" id="username" type="email" placeholder="Email" autocomplete="off">
+                        <input name="u_email" class="form-control form-control-lg" id="username" type="email" placeholder="Email">
                     </div>
                     <div class="form-group">
                         <input name="u_pass" class="form-control form-control-lg" id="password" type="password" placeholder="Password">
