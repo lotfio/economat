@@ -1,4 +1,19 @@
-    <style>
+<!doctype html>
+<html lang="en">
+ 
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>ECONOMAT | LOGIN </title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="<?=base_url()?>assets/vendor/bootstrap/css/bootstrap.min.css">
+    <link href="<?=base_url()?>assets/vendor/fonts/circular-std/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="<?=base_url()?>assets/libs/css/style.css">
+    <link rel="stylesheet" href="<?=base_url()?>assets/vendor/fonts/fontawesome/css/fontawesome-all.css">
+ </head>
+
+ <style>
     html,
     body {
         height: 100%;
@@ -57,3 +72,9 @@
             </div>
         </div>
     </div>
+
+    <script src="<?=base_url()?>assets/vendor/jquery/jquery-3.3.1.min.js"></script>
+    <script src="<?=base_url()?>assets/vendor/bootstrap/js/bootstrap.bundle.js"></script>
+</body>
+ 
+</html>

@@ -12,6 +12,3 @@
     <link rel="stylesheet" href="<?=base_url()?>assets/libs/css/style.css">
     <link rel="stylesheet" href="<?=base_url()?>assets/vendor/fonts/fontawesome/css/fontawesome-all.css">
  </head>
-
-  <!-- main wrapper -->
-    <!-- ============================================================== -->

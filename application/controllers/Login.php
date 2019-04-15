@@ -11,12 +11,7 @@ class Login extends CI_Controller {
 	{	
 		// login
 		if ($this->session->userdata('logged') == TRUE) return redirect('panel');
-
-		$data['title'] = "LOGIN";
-
-		$this->load->view("template/header", $data);
 		$this->load->view("login/index");
-		$this->load->view("template/footer");
 	}
 
 
