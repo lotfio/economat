@@ -6,9 +6,13 @@
 
 .profile-img{
 	width: 200px;
+    height: 200px;
 	position: relative;
 }
-
+.profile-img img{
+    width: 100%;
+    height: 100%;
+}
 .profile-img input{
 	display: none;
 }

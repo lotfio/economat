@@ -60,7 +60,7 @@
 
                                 <div class="card-body border-top">
                                         <span class="badge-dot  badge-secondary"></span>
-                                        <a class="text-secondary" href="<?=base_url()?>dashboard/accountedit?>">Update Information</a>
+                                        <a class="text-secondary" href="<?=base_url()?>dashboard/accountedit">Update Information</a>
                                 </div>
                             </div>
                             <!-- ============================================================== -->

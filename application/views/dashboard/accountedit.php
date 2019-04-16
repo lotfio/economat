@@ -36,7 +36,7 @@
                             <div class="card">
                                 <h5 class="card-header">Update Your Profile Information</h5>
                                 <div class="card-body">
-                                    <?=form_open_multipart("dashboard/proceededit")?>
+                                    <?=form_open_multipart("dashboard/proceededit/".$user->u_id)?>
 
        <!-- show error messages if the form validation fails -->
         <?php if ($this->session->flashdata('error')) { ?>
@@ -54,9 +54,9 @@
 
                                             <div class="profile-img">  
                                                 <?php if(!empty($user->u_img) && file_exists(UP_IMG.$user->u_img)):?>
-                                                    <img src="<?=base_url()?>assets/images/<?=$user->u_img?>" alt="User Avatar" class="rounded-circle mr-3 mw-100">
+                                                    <img src="<?=base_url()?>assets/images/<?=$user->u_img?>" alt="User Avatar" class="rounded-circle mr-3">
                                                 <?php else:?>
-                                                    <img src="<?=base_url()?>assets/images/avatar.svg" alt="User Avatar" class="rounded-circle mr-3 mw-100">
+                                                    <img src="<?=base_url()?>assets/images/avatar.svg" alt="User Avatar" class="rounded-circle mr-3">
                                                 <?php endif?>
 
                                                 <label for="u_img"><i class="fa fa-fw fa-camera"></i></label>   
@@ -71,7 +71,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="inputEmail">Email address</label>
-                                            <input id="inputEmail" type="u_email" name="email" data-parsley-trigger="change" required="" placeholder="Enter email" autocomplete="off" class="form-control"  value="<?=$user->u_email?>">
+                                            <input id="inputEmail" type="u_email" name="u_email" data-parsley-trigger="change" required="" placeholder="Enter email" autocomplete="off" class="form-control"  value="<?=$user->u_email?>">
                                         </div>
 
                                          <div class="form-group">

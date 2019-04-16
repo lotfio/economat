@@ -58,49 +58,15 @@ class Dashboard extends CI_Controller {
 
 
 
-	public function proceededit()
-	{
-			
-		// if user want to update image 
-		if(!empty($_FILES['u_img']['name']))
+	public function proceededit($id = null)
+	{			
+
+		if($this->input->post('update')) // must be post
 		{
-			$config['upload_path']   = UP_IMG;
-			$config['allowed_types'] = 'gif|jpg|png|jpeg';
-			$config['max_size']      = '2000';
-			$config['encrypt_name']  = TRUE;
-
-			$this->load->library('upload', $config);
-			$this->upload->initialize($config);
-
-	        if ( !$this->upload->do_upload("u_img"))
-		        {
-		                //and redirect to login page with flashdata invalid msg
-				        $this->session->set_flashdata('error', $this->upload->display_errors());
-				        return redirect(base_url().'dashboard/accountedit');  
-		        }
-		        else
-		        {
-		                $data = array('upload_data' => $this->upload->data());
-		                $this->session->set_flashdata('success', "Profile Image Updated successfully");
-				        return redirect(base_url().'dashboard/accountedit'); 
-		        }
-			}
-
-			if($this->input->post('update'))
-			{
-				$loggedUser = $this->session->logged->u_id; 
-
-				if($this->DashboardModel->updateUser($loggedUser))
-				{
-					$this->session->set_flashdata('success', "Profile Updated successfully");
-				     return redirect(base_url().'dashboard/accountedit');
-				}
-
-
-				$this->session->set_flashdata('error', "Error Updating Profile");
-				return redirect(base_url().'dashboard/accountedit');
-			}
-
-			return redirect(base_url().'dashboard/accountedit'); 
+			$id = (int) $id;
+			$this->DashboardModel->updateUserInfo($id);
 		}
+
+		return redirect(base_url()."dashboard/accountedit");
+	}
 }

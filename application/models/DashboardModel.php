@@ -4,25 +4,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class DashboardModel extends CI_Model
 {
-	
 
-
-	public function updateUser($id)
-	{
-
-		dd($_POST);
-		$data = array(
-               'u_name'  => $this->input->post("u_name"),
-               'u_email' => $this->input->post("u_name"),
-               'u_phone' => $this->input->post("u_name"), //TODO:: hadi
-               'u_level' => $this->input->post("u_name"), // lazem u level ghir lel admin
-            );
- 
-		$this->db->where('u_id', $id);
-		$this->db->update('users', $data);
-
-	}
-
+	/**
+	 * @param  id
+	 * @return void
+	 */
 	public function getUserById($id = 0)
 	{
 		$id = (int) $id;
@@ -40,8 +26,93 @@ class DashboardModel extends CI_Model
 	**/
 	public function getPermissions()
 	{
-		$this->load->database();
 		$query = $this->db->query("SELECT * FROM permissions");
 		return $query->result_object(); //: FALSE;
+	}
+
+	/**
+	 * @param  int $id user id
+	 * @return void
+	 */
+	public function updateUserInfo($id)
+	{
+		$data = [ // data to be updated
+					'u_name'  => $this->security->xss_clean($this->input->post('u_name')),
+					'u_email' => $this->security->xss_clean($this->input->post('u_email')),
+					'u_phone' => $this->security->xss_clean($this->input->post('u_phone'))
+				];
+
+				if($this->session->logged->u_level == 'Administrator') // if administrator change level
+				{
+					$data['u_level'] = $this->security->xss_clean($this->input->post('u_level'));
+				}
+
+				// if user want to update image 
+				if(!empty($_FILES['u_img']['name'])) // if image set update image
+				{
+					$config['upload_path']   = UP_IMG;
+					$config['allowed_types'] = 'gif|jpg|png|jpeg';
+					$config['max_size']      = '2000';
+					$config['encrypt_name']  = TRUE;
+
+					$this->load->library('upload', $config);
+					$this->upload->initialize($config);
+
+			        if ( !$this->upload->do_upload("u_img"))
+				        {
+				                //and redirect to login page with flashdata invalid msg
+						        $this->session->set_flashdata('error', $this->upload->display_errors());
+						        return redirect(base_url().'dashboard/accountedit');  
+				        }
+				        else
+				        {
+
+				                $up = (object) $this->upload->data();
+
+				                $data['u_img'] = $up->file_name;
+
+								$this->db->where('u_id', $id);
+								
+								if($this->db->update('users', $data))
+								{
+									// refresh session
+									$this->session->unset_userdata('logged');
+									$this->session->set_userdata('logged', $this->fetchloggedInUserWithLevel($id));
+
+									$this->session->set_flashdata('success', "Profile Updated successfully");
+								    return redirect(base_url().'dashboard/accountedit');
+								}
+				        }
+					}
+
+
+				$this->db->where('u_id', $id);
+				
+				if($this->db->update('users', $data))
+				{
+					// refresh session
+					$this->session->unset_userdata('logged');
+					$this->session->set_userdata('logged',$this->fetchloggedInUserWithLevel($id));
+
+					$this->session->set_flashdata('success', "Profile Updated successfully");
+				    return redirect(base_url().'dashboard/accountedit');
+				}
+
+				$this->session->set_flashdata('error', "Error Updating Profile");
+				return redirect(base_url().'dashboard/accountedit');
+	}
+
+	/**
+	 * @param  id
+	 * @return void
+	 */
+	public function fetchloggedInUserWithLevel($id)
+	{
+		$usr = $this->getUserById($id);
+		$q   = $this->db->query("SELECT * FROM permissions WHERE p_level='$usr->u_level'");
+		unset($usr->u_passwd);
+		$usr->u_level = $q->row_object()->p_name;
+
+		return $usr;
 	}
 }
