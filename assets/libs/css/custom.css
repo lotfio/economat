@@ -1,0 +1,29 @@
+/**
+** Economat 2018
+** Lotfio Lakehal
+**
+*/
+
+.profile-img{
+	width: 200px;
+	position: relative;
+}
+
+.profile-img input{
+	display: none;
+}
+
+.profile-img label{
+	position: absolute;
+    right: -6px;
+    top: 31px;
+    background: #efeff6;
+    padding: 6px 8px;
+    border-radius: 50px;
+    border: 1px solid rgba(0,0,0,.125);
+    cursor: pointer;
+}
+
+.profile-img label:hover{
+	background: #c5c5cc;
+}
