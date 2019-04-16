@@ -36,8 +36,20 @@
                             <div class="card">
                                 <h5 class="card-header">Update Your Profile Information</h5>
                                 <div class="card-body">
-                                    <?=form_open("dashboard/accountedit")?>
+                                    <?=form_open_multipart("dashboard/proceededit")?>
 
+       <!-- show error messages if the form validation fails -->
+        <?php if ($this->session->flashdata('error')) { ?>
+            <div class="alert alert-danger">
+                <?=$this->session->flashdata('error'); ?>
+            </div>
+        <?php } ?>
+
+        <?php if ($this->session->flashdata('success')) { ?>
+            <div class="alert alert-success">
+                <?=$this->session->flashdata('success'); ?>
+            </div>
+        <?php } ?>
                                         <div class="form-group ">
 
                                             <div class="profile-img">  
@@ -48,7 +60,7 @@
                                                 <?php endif?>
 
                                                 <label for="u_img"><i class="fa fa-fw fa-camera"></i></label>   
-                                                <input type="file" name="u_img" id="u_img" class="u_img" class="hide">
+                                                <input type="file" name="u_img" id="u_img" class="u_img">
                                             </div>
 
                                         </div>
@@ -64,22 +76,36 @@
 
                                          <div class="form-group">
                                             <label for="inputPhoned">Phone</label>
-                                            <input id="inputPhoned" type="phone" placeholder="Phone" class="form-control"  value="<?=$user->u_phone?>">
+                                            <input id="inputPhoned" type="phone" name="u_phone" placeholder="Phone" class="form-control"  value="<?=$user->u_phone?>">
                                         </div>
                                         
                                         <?php if(strtolower($user->u_level) == 'administrator'):?>
                                             <div class="form-group">
-                                                <label for="input-select">Permissions level</label>
-                                                <select class="form-control" id="input-select">
-                                                    <option value="<?=$user->u_level?>" selected><?=$user->u_level?></option>
+                                                <label for="input-select"><span class="text-secondary">Permissions level</span></label>
+                                                <select class="form-control" name="u_level" id="input-select">
+                                                   
+    <?php 
+
+        foreach ($permissions as $permission) {
+            if($user->u_level == $permission->p_name)
+            {
+                echo ' <option value="'.$permission->p_level.'" selected>'.$permission->p_name.'</option>';
+                continue;
+            }
+
+            echo '<option value="'.$permission->p_level.'">'.$permission->p_name.'</option>';
+        }
+    ?>
+
+
                                                 </select>
                                             </div>
                                          <?php endif?>
-<?=print_r($permissions)?>
+
                                         <div class="row">
                                             <div class="col-sm-12 pl-0">
                                                 <p class="text-right">
-                                                    <button type="submit" class="btn btn-space btn-primary">Submit</button>
+                                                    <button type="submit" name="update" value="update" class="btn btn-space btn-primary">Submit</button>
                                                     <button type="reset" class="btn btn-space btn-secondary">Cancel</button>
                                                 </p>
                                             </div>

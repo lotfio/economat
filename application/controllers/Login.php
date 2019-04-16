@@ -42,7 +42,7 @@ class Login extends CI_Controller {
         $this->session->set_userdata('logged', false);
             
         //and redirect to login page with flashdata invalid msg
-        $this->session->set_flashdata('msg', 'Username / Password Invalid');
+        $this->session->set_flashdata('msg', 'Invalid Username OR Password');
         return redirect(base_url().'login');    
 	}
 
