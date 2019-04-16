@@ -19,7 +19,7 @@
                             </li>
 
                             <li class="nav-item ">
-                            <a class="nav-link" href="#"><i class="fa fa-fw fa-user-circle"></i>Dashboard</a>
+                            <a class="nav-link" href="#"><i class="fa fa-fw fa-users"></i>Users</a>
                             </li>
                         </ul>
                     </div>

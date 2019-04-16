@@ -29,6 +29,10 @@ class Dashboard extends CI_Controller {
 
 		$data['title'] = "PANEL";
 		$data['user'] = $this->session->logged;
+
+		$this->load->helper('date');
+		$data['last_visit'] = time_elapsed_string($data['user']->u_join_date);
+
 		$this->load->view('template/header', $data);
 		$this->load->view('template/navbar', $data);
 		$this->load->view('template/sidebar', $data);

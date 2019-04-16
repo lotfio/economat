@@ -84,8 +84,8 @@
                                             <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
                                                 <div class="card">
                                                     <div class="card-body">
-                                                        <h1 class="mb-1">9</h1>
-                                                        <p>Campaign Invitations</p>
+                                                        <h1 class="mb-1"><?=$last_visit?></h1>
+                                                        <p>Last Visit</p>
                                                     </div>
                                                 </div>
                                             </div>
