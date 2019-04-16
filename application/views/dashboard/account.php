@@ -37,7 +37,11 @@
                             <div class="card">
                                 <div class="card-body">
                                     <div class="user-avatar text-center d-block">
-                                        <img src="<?=base_url()?>assets/images/avatar.svg" alt="User Avatar" class="rounded-circle user-avatar-xxl">
+                                        <?php if(!empty($user->u_img) && file_exists(UP_IMG.$user->u_img)):?>
+                                            <img src="<?=base_url()?>assets/images/<?=$user->u_img?>" alt="User Avatar" class="rounded-circle user-avatar-xxl">
+                                        <?php else:?>
+                                            <img src="<?=base_url()?>assets/images/avatar.svg" alt="User Avatar" class="rounded-circle user-avatar-xxl">
+                                        <?php endif?>
                                     </div>
                                     <div class="text-center">
                                         <h2 class="font-24 mb-0"><?=ucfirst($user->u_name)?></h2>
@@ -52,6 +56,11 @@
                                         <li class="mb-0"><i class="fas fa-fw fa-phone mr-2"></i><?=$user->u_phone?></li>
                                     </ul>
                                     </div>
+                                </div>
+
+                                <div class="card-body border-top">
+                                        <span class="badge-dot  badge-secondary"></span>
+                                        <a class="text-secondary" href="<?=base_url()?>dashboard/accountedit/<?=$user->u_id?>">Update Information</a>
                                 </div>
                             </div>
                             <!-- ============================================================== -->
@@ -69,7 +78,7 @@
                                         <div class="row">
                                             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                                                 <div class="section-block">
-                                                    <h3 class="section-title">Administrator Activity</h3>
+                                                    <h3 class="section-title"><?=$user->u_level?> Activity</h3>
                                                 </div>
                                             </div>
                                             <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
@@ -114,4 +123,4 @@
                         </div>
                         </div>
                         <!-- ============================================================== -->
-                        <!-- end campaign data -->
+                        <!-- end campaign data -->                        

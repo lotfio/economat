@@ -35,4 +35,10 @@ class Dashboard extends CI_Controller {
 		$this->load->view('template/foot');
 		$this->load->view('template/footer');
 	}
+
+
+	public function accountedit($id = 0)
+	{
+		
+	} 
 }
