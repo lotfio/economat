@@ -15,7 +15,7 @@
                                 Menu
                             </li>
                             <li class="nav-item ">
-                            <a class="nav-link active" href="<?=base_url()?>panel"><i class="fa fa-fw fa-user-circle"></i>Dashboard</a>
+                            <a class="nav-link active" href="<?=base_url()?>dashboard"><i class="fa fa-fw fa-user-circle"></i>Dashboard</a>
                             </li>
 
                             <li class="nav-item ">
