@@ -10,7 +10,7 @@ class Login extends CI_Controller {
 	public function index($name = null)
 	{	
 		// login
-		if ($this->session->userdata('logged') == TRUE) return redirect('panel');
+		if ($this->session->userdata('logged') == TRUE) return redirect('dashboard');
 		$this->load->view("login/index");
 	}
 
@@ -29,10 +29,11 @@ class Login extends CI_Controller {
 		if($this->loginModel->performLogin())
 		{
 			$data =  $this->loginModel->performLogin();
-			unset($data->u_passwd); // remove passwd
+			$data->u_level = $data->p_name;
+			unset($data->u_passwd, $data->p_id, $data->p_name, $data->p_level); // remove passwd and unneccessary data
 
 			$this->session->set_userdata("logged", $data);
-			return redirect(base_url() .'panel');
+			return redirect(base_url() .'dashboard');
 		}
 
 		// error login

@@ -13,6 +13,7 @@ class LoginModel extends CI_Model
 
     	$this->db->where('u_email', $u_email);
 	    $this->db->where('u_passwd', $u_pass);
+	    $this->db->join('permissions', 'permissions.p_level = users.u_level', 'left');
 	    $result = $this->db->get('users');
 
 	    return $result->num_rows() == 1 ? $result->row() : FALSE;

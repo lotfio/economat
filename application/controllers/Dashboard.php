@@ -17,7 +17,7 @@ class Dashboard extends CI_Controller {
 		$this->load->view('template/header', $data);
 		$this->load->view('template/navbar', $data);
 		$this->load->view('template/sidebar', $data);
-		$this->load->view('panel/welcome');
+		$this->load->view('dashboard/welcome');
 		$this->load->view('template/foot');
 		$this->load->view('template/footer');
 	}
@@ -28,11 +28,10 @@ class Dashboard extends CI_Controller {
 
 		$data['title'] = "PANEL";
 		$data['user'] = $this->session->logged;
-
 		$this->load->view('template/header', $data);
 		$this->load->view('template/navbar', $data);
 		$this->load->view('template/sidebar', $data);
-		$this->load->view('panel/account');
+		$this->load->view('dashboard/account');
 		$this->load->view('template/foot');
 		$this->load->view('template/footer');
 	}

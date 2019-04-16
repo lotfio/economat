@@ -7,7 +7,7 @@
                     <div class="row">
                         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                             <div class="page-header">
-                                <h3 class="mb-2"><?=($user->u_level == 1)? 'Administrator' : 'Manager'?> Profile </h3>
+                                <h3 class="mb-2"><?=$user->u_level?> Profile </h3>
                                 
                                 <div class="page-breadcrumb">
                                     <nav aria-label="breadcrumb">
@@ -41,7 +41,7 @@
                                     </div>
                                     <div class="text-center">
                                         <h2 class="font-24 mb-0"><?=ucfirst($user->u_name)?></h2>
-                                        <p>@<?=($user->u_level == 1)? 'Administrator' : 'Manager'?></p>
+                                        <p>@<?=$user->u_level?></p>
                                     </div>
                                 </div>
                                 <div class="card-body border-top">
