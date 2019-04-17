@@ -15,11 +15,15 @@
                                 Menu
                             </li>
                             <li class="nav-item ">
-                            <a class="nav-link active" href="<?=base_url()?>dashboard"><i class="fa fa-fw fa-user-circle"></i>Dashboard</a>
+                                <a class="nav-link <?=$this->uri->segment(1) == 'dashboard'? 'active' :''?> " href="<?=base_url()?>dashboard"><i class="fa fa-fw fa-user-circle"></i>Dashboard</a>
                             </li>
 
                             <li class="nav-item ">
-                            <a class="nav-link" href="#"><i class="fa fa-fw fa-users"></i>Users</a>
+                                <a class="nav-link <?=$this->uri->segment(1) == 'users'? 'active' :''?> " href="<?=base_url()?>users"><i class="fa fa-fw fa-users"></i>Users</a>
+                            </li>
+
+                             <li class="nav-item ">
+                                <a class="nav-link <?=$this->uri->segment(1) == 'command'? 'active' :''?> " href="<?=base_url()?>command"><i class="fa fa-fw fa-users"></i>Command</a>
                             </li>
                         </ul>
                     </div>
