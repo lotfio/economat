@@ -20,6 +20,34 @@ class UsersModel extends CI_Model
        return $this->db->count_all("users");
    }
 
+   	public function getById($id = 0)
+	{
+		$id = (int) $id;
+
+		$this->db->select("*");
+		$this->db->from("users");
+		$this->db->where("u_id", $id);
+		$res = $this->db->get();
+
+		return $res->num_rows() == 1 ? $res->row() : FALSE;
+	}
+
+	/**
+	 * get user permission
+	 * 
+	 * @param  int $p_level
+	 * @return mixed
+	 */
+	public function getPermissionsLevel($p_level)
+	{
+		$this->db->select("*");
+		$this->db->from("permissions");
+		$this->db->where("p_level", $p_level);
+		$res = $this->db->get();
+
+		return $res->num_rows() == 1 ? $res->row()->p_name : FALSE;
+	}
+
 
    /**
     * fetch users

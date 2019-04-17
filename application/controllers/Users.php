@@ -65,4 +65,26 @@ class Users extends CI_Controller
 	}
 
 
+	/**
+	 * show users info method
+	 * 
+	 * @return void
+	 */
+	public function info($id = null)
+	{
+		$data['title'] = "USERS";
+		$data['user']  = $this->session->logged;
+
+		$data['info_user'] = $this->UsersModel->getById($id);
+
+		$data['info_user_level'] = $this->UsersModel->getPermissionsLevel($data['info_user']->u_level);
+
+		$this->load->view('template/header', $data);
+		$this->load->view('template/navbar', $data);
+		$this->load->view('template/sidebar', $data);
+		$this->load->view('users/info');
+		$this->load->view('template/foot');
+		$this->load->view('template/footer');
+	}
+
 }

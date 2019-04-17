@@ -32,10 +32,7 @@
                                                 <th>Phone Number</th>
                                                 <th>Permissions level</th>
                                                 <th>Join date</th>
-                                                <?php if($user->u_level == 'Administrator'):?>
-                                                	<th>Action</th>
-                                                <?php endif?>
-
+                                                <th>Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -51,13 +48,13 @@
 
 
 
+                                                <td>
+                                                    <a href="<?=base_url()?>users/info/<?=$usr->u_id?>"><span class="badge badge-info">Info</span></a>
                                                 <?php if($user->u_level == 'Administrator'):?>
-                                                    <td>
-                                                        <a href="<?=base_url()?>users/info/<?=$usr->u_id?>"><span class="badge badge-info">Info</span></a>
                                                         <a href="<?=base_url()?>users/update/<?=$usr->u_id?>"><span class="badge badge-success">Info</span></a>
                                                         <a href="<?=base_url()?>users/delete/<?=$usr->u_id?>"><span class="badge badge-secondary">Info</span></a>
-                                                    </td>
                                                 <?php endif?>
+                                                </td>
                                                 </tr> <!-- end row -->
                                             <?php endforeach;?>
                                             
