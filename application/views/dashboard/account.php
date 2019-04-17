@@ -58,9 +58,14 @@
                                     </div>
                                 </div>
 
+                                
                                 <div class="card-body border-top">
-                                        <span class="badge-dot  badge-secondary"></span>
-                                        <a class="text-secondary" href="<?=base_url()?>dashboard/accountedit">Update Information</a>
+                                        <ul class="list-unstyled mb-0">
+                                            <li><i class="fas fa-fw fa-user mr-2"></i>Last Visit : <?=$last_visit?></li>
+                                        </ul>
+                                </div>
+                                <div class="card-body border-top">
+                                        <a class="text-secondary" href="<?=base_url()?>dashboard/accountedit"><i class="fa fa-fw fa-edit text-secondary"></i> Update Information</a>
                                 </div>
                             </div>
                             <!-- ============================================================== -->
@@ -84,7 +89,7 @@
                                             <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
                                                 <div class="card">
                                                     <div class="card-body">
-                                                        <h1 class="mb-1"><?=$last_visit?></h1>
+                                                        <h1 class="mb-1">200</h1>
                                                         <p>Last Visit</p>
                                                     </div>
                                                 </div>

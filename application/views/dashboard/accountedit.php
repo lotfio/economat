@@ -115,6 +115,54 @@
                             </div>
                         </div>
 
-                    </div>
+
+                        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
+                            <div class="card">
+                                <h5 class="card-header">Update Your Password</h5>
+                                <div class="card-body">
+                                    <?=form_open("dashboard/proceededitpassword/".$user->u_id)?>
+
+       <!-- show error messages if the form validation fails -->
+        <?php if ($this->session->flashdata('p_error')) { ?>
+            <?php foreach($this->session->flashdata('p_error') as $err): ?>
+                <div class="alert alert-danger">
+                        <?=$err?>
+                </div>
+            <?php endforeach?>
+        <?php } ?>
+
+        <?php if ($this->session->flashdata('p_success')) { ?>
+            <div class="alert alert-success">
+                <?=$this->session->flashdata('p_success'); ?>
+            </div>
+        <?php } ?>
+
+        <?php echo validation_errors(); ?>
+                                         <div class="form-group">
+                                            <label for="u_pass">Password</label>
+                                            <input id="u_pass" type="password" name="u_pass" placeholder="Password" class="form-control">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="uc_pass">Confirm Password</label>
+                                            <input id="uc_pass" type="password" name="uc_pass" placeholder="Confirm Password" class="form-control">
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-sm-12 pl-0">
+                                                <p class="text-right">
+                                                    <button type="submit" name="update" value="update" class="btn btn-space btn-primary">Submit</button>
+                                                    <button type="reset" class="btn btn-space btn-secondary">Cancel</button>
+                                                </p>
+                                            </div>
+                                        </div>
+
+                                    <?=form_close()?>
+
+                                </div>
+                            </div>
+                        </div> <!-- col 2-->
+
+                    </div> <!-- end of row -->
                     <!-- ============================================================== -->
                     <!-- end campaign data -->                        

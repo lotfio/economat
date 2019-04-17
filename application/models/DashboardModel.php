@@ -30,6 +30,41 @@ class DashboardModel extends CI_Model
 		return $query->result_object(); //: FALSE;
 	}
 
+
+	/**
+	 * update user password
+	 * @param  int $id user id
+	 * @return void
+	 */
+	public function updateUserPass($id)
+	{
+		$this->load->library('form_validation');
+
+		$this->form_validation->set_rules('u_pass', 'Password', 'trim|required|min_length[8]');
+		$this->form_validation->set_rules('uc_pass', 'Confirm Password', 'trim|required|matches[u_pass]');
+
+
+		if ($this->form_validation->run() == FALSE)
+        {
+
+			$this->session->set_flashdata('p_error', $this->form_validation->error_array());
+			return redirect(base_url().'dashboard/accountedit'); 
+        }
+        else
+        {
+       		$data = [ 'u_passwd'  => SHA1($this->security->xss_clean($this->input->post('u_pass')))];
+
+			$this->db->where('u_id', $id);
+								
+			if($this->db->update('users', $data))
+			{
+				$this->session->set_flashdata('p_success', "Password Updated successfully");
+				return redirect(base_url().'dashboard/accountedit');
+			}
+
+
+        }
+	}
 	/**
 	 * @param  int $id user id
 	 * @return void

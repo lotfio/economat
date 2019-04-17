@@ -10,6 +10,11 @@ class Dashboard extends CI_Controller {
 		$this->load->model('DashboardModel');
 	}
 
+
+	/**
+	 *  dashboard index
+	 * @return void
+	 */
 	public function index()
 	{
 		$data['title'] = "PANEL";
@@ -24,12 +29,17 @@ class Dashboard extends CI_Controller {
 	}
 
 
+	/**
+	 * dashboard account page
+	 * @return void
+	 */
 	public function account()
 	{
 
 		$data['title'] = "PANEL";
 		$data['user'] = $this->session->logged;
 
+		// last visit
 		$this->load->helper('date');
 		$data['last_visit'] = time_elapsed_string($data['user']->u_join_date);
 
@@ -42,6 +52,10 @@ class Dashboard extends CI_Controller {
 	}
 
 
+	/**
+	 * dashboard edit account
+	 * @return void
+	 */
 	public function accountedit()
 	{
 
@@ -61,7 +75,11 @@ class Dashboard extends CI_Controller {
 	}
 
 
-
+	/**
+	 * perform edit profile
+	 * @param  int $id user id
+	 * @return
+	 */	
 	public function proceededit($id = null)
 	{			
 
@@ -73,4 +91,21 @@ class Dashboard extends CI_Controller {
 
 		return redirect(base_url()."dashboard/accountedit");
 	}
+
+	/**
+	 * perform password updaet
+	 * @param  int $id user id
+	 * @return void
+	 */
+	public function proceededitPassword($id = null)
+	{
+		if($this->input->post('update')) // must be post
+		{
+			$id = (int) $id;
+			$this->DashboardModel->updateUserPass($id);
+		}
+
+		return redirect(base_url()."dashboard/accountedit");
+	}
+
 }
