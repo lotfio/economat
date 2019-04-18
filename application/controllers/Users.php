@@ -120,7 +120,6 @@ class Users extends CI_Controller
 	 */
 	public function performUpdate($id = null)
 	{
-		$data['title'] = "USER UPDATE";
 		$data['user']  = $this->session->logged;
 		$data['info_user'] = $this->UsersModel->getById($id);
 
@@ -134,8 +133,28 @@ class Users extends CI_Controller
 				return $this->UsersModel->updateUser($id);
 			}
 
-			dd('0000');
 			return redirect(base_url()."users/update");
+		}
+
+		return show_404();
+	}
+
+	/**
+	 * delete user method
+	 * @param  int $id
+	 * @return void    
+	 */
+	public function delete($id = null)
+	{
+		$data['user']  = $this->session->logged;
+		$data['info_user'] = $this->UsersModel->getById($id);
+
+
+		if($data['info_user'] && strtolower($data['user']->u_level) == 'administrator') // only admins
+		{
+
+			$id = (int) $id;
+			return $this->UsersModel->deleteUser($id);
 		}
 
 		return show_404();

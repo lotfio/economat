@@ -145,4 +145,23 @@ class UsersModel extends CI_Model
 				$this->session->set_flashdata('error', "Error Updating Profile");
 				return redirect(base_url().'users/update/'.$id);
 	}
+
+	/**
+	 * delete user
+	 * 	
+	 * @param  int   $id
+	 * @return void
+	 */
+	public function deleteUser($id = null)
+	{
+		// no need to check since we did chek on the controller
+		if($this->db->delete('users', array('u_id' => $id)))
+		{
+			$this->session->set_flashdata('success', "User Deleted successfully");
+			return redirect(base_url().'users');
+		}
+
+		$this->session->set_flashdata('error', "Error deleting user");
+		return redirect(base_url().'users');
+	}
 }

@@ -1,3 +1,18 @@
+<div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header"></div>
+            <div class="modal-body">
+                Are You Sure You want to delete This User
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-dark" data-dismiss="modal">Cancel</button>
+                <a class="btn btn-secondary btn-ok">Delete</a>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="dashboard-wrapper">
 <div class="container-fluid dashboard-content">
     <div class="row">
@@ -26,6 +41,21 @@
                             </div>
                             
                             <div class="card-body">
+
+       <!-- show error messages if the form validation fails -->
+        <?php if ($this->session->flashdata('error')) { ?>
+            <div class="alert alert-danger">
+                <?=$this->session->flashdata('error'); ?>
+            </div>
+        <?php } ?>
+
+        <?php if ($this->session->flashdata('success')) { ?>
+            <div class="alert alert-success">
+                <?=$this->session->flashdata('success'); ?>
+            </div>
+        <?php } ?>
+
+
 
                                 <?php if(is_array($users)): // if there is users ?>
 
@@ -58,7 +88,13 @@
                                                     <a href="<?=base_url()?>users/info/<?=$usr->u_id?>"><span class="badge badge-info">Info</span></a>
                                                 <?php if($user->u_level == 'Administrator'):?>
                                                         <a href="<?=base_url()?>users/update/<?=$usr->u_id?>"><span class="badge badge-success">update</span></a>
-                                                        <a href="<?=base_url()?>users/delete/<?=$usr->u_id?>"><span class="badge badge-secondary">delete</span></a>
+        
+        <a data-href="<?=base_url()?>users/delete/<?=$usr->u_id?>" data-toggle="modal" data-target="#confirm-delete"
+
+        ><span class="badge badge-secondary pointer">delete</span></a>
+
+
+
                                                 <?php endif?>
                                                 </td>
                                                 </tr> <!-- end row -->
