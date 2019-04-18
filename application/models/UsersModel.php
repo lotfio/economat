@@ -29,7 +29,14 @@ class UsersModel extends CI_Model
 		$this->db->where("u_id", $id);
 		$res = $this->db->get();
 
-		return $res->num_rows() == 1 ? $res->row() : FALSE;
+		if($res->num_rows() == 1)
+		{
+			$row = $res->row();
+			$row->u_level = $this->getPermissionsLevel($row->u_level) ? $this->getPermissionsLevel($row->u_level) : NULL;
+			return $row;
+
+		}
+		return FALSE;
 	}
 
 	/**
@@ -64,6 +71,8 @@ class UsersModel extends CI_Model
        if ($query->num_rows() > 0) {
 
            foreach ($query->result() as $row) {
+           		// get permissions level directly
+           		$row->u_level = $this->getPermissionsLevel($row->u_level) ? $this->getPermissionsLevel($row->u_level) : NULL;
 
                $data[] = $row;
            }

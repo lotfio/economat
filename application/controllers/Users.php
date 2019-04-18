@@ -72,19 +72,23 @@ class Users extends CI_Controller
 	 */
 	public function info($id = null)
 	{
-		$data['title'] = "USERS";
+		$data['title'] = "USERS INFORMATION";
 		$data['user']  = $this->session->logged;
 
 		$data['info_user'] = $this->UsersModel->getById($id);
 
-		$data['info_user_level'] = $this->UsersModel->getPermissionsLevel($data['info_user']->u_level);
+		if($data['info_user'])
+		{		
+			$this->load->view('template/header', $data);
+			$this->load->view('template/navbar', $data);
+			$this->load->view('template/sidebar', $data);
+			$this->load->view('users/info');
+			$this->load->view('template/foot');
+			return $this->load->view('template/footer');
+		}
 
-		$this->load->view('template/header', $data);
-		$this->load->view('template/navbar', $data);
-		$this->load->view('template/sidebar', $data);
-		$this->load->view('users/info');
-		$this->load->view('template/foot');
-		$this->load->view('template/footer');
+		return show_404();
+
 	}
 
 }
