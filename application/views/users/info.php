@@ -18,7 +18,7 @@
 		        <nav aria-label="breadcrumb">
 		            <ol class="breadcrumb">
 		                <li class="breadcrumb-item"><a href="<?=base_url()?>users" class="breadcrumb-link">Users</a></li>
-		                <li class="breadcrumb-item"><a>information</a></li>
+		                <li class="breadcrumb-item"><a>Information</a></li>
 		            </ol>
 		        </nav>
 		    </div>

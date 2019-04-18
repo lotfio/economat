@@ -160,4 +160,25 @@ class Users extends CI_Controller
 		return show_404();
 	}
 
+
+	public function add()
+	{
+		$data['title'] = "ADD USERS";
+		$data['user']  = $this->session->logged;
+		$data['permissions']  = $this->DashboardModel->getPermissions();
+
+
+		if(strtolower($data['user']->u_level) == 'administrator') // only admins
+		{		
+			$this->load->view('template/header', $data);
+			$this->load->view('template/navbar', $data);
+			$this->load->view('template/sidebar', $data);
+			$this->load->view('users/add');
+			$this->load->view('template/foot');
+			return $this->load->view('template/footer');
+		}
+
+		return show_404();
+	}
+
 }
