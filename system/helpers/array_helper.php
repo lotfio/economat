@@ -119,10 +119,10 @@ if ( ! function_exists('dd'))
 	/**
 	 * @param	array
 	 */
-	function dd($array)
+	function dd($array, $info = FALSE)
 	{
 		echo '<pre>';
-		print_r($array);
+		$info == TRUE  ? var_dump($array) : print_r($array);
 		echo '</pre>';
 		die;
 	}

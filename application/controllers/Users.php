@@ -8,6 +8,7 @@ class Users extends CI_Controller
 		parent::__construct();
 		if($this->session->userdata('logged') == FALSE) redirect('login');
 		$this->load->model('UsersModel');
+		$this->load->model('DashboardModel');
 	}
 
 	/**
@@ -89,6 +90,55 @@ class Users extends CI_Controller
 
 		return show_404();
 
+	}
+
+	public function update($id = null)
+	{
+		$data['title'] = "USERS INFORMATION";
+		$data['user']  = $this->session->logged;
+		$data['permissions']  = $this->DashboardModel->getPermissions();
+
+		$data['info_user'] = $this->UsersModel->getById($id);
+
+		if($data['info_user'] && strtolower($data['user']->u_level) == 'administrator') // only admins
+		{		
+			$this->load->view('template/header', $data);
+			$this->load->view('template/navbar', $data);
+			$this->load->view('template/sidebar', $data);
+			$this->load->view('users/update');
+			$this->load->view('template/foot');
+			return $this->load->view('template/footer');
+		}
+
+		return show_404();
+	}
+
+	/**
+	 * update user
+	 * @param  int $id
+	 * @return void
+	 */
+	public function performUpdate($id = null)
+	{
+		$data['title'] = "USER UPDATE";
+		$data['user']  = $this->session->logged;
+		$data['info_user'] = $this->UsersModel->getById($id);
+
+
+		if($data['info_user'] && strtolower($data['user']->u_level) == 'administrator') // only admins
+		{
+
+			if($this->input->post('update')) // must be post
+			{
+				$id = (int) $id;
+				return $this->UsersModel->updateUser($id);
+			}
+
+			dd('0000');
+			return redirect(base_url()."users/update");
+		}
+
+		return show_404();
 	}
 
 }

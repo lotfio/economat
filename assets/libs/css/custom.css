@@ -31,3 +31,12 @@
 .profile-img label:hover{
 	background: #c5c5cc;
 }
+
+.card-head{
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 2px solid #e6e6f2;
+}
+.btn-table{
+    margin: 8px;
+}

@@ -4,7 +4,7 @@
         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
 
 <div class="page-header">
-    <h3 class="mb-2">Ecomat Users</h3>
+    <h3 class="mb-2">Economat Users</h3>
 
     <div class="page-breadcrumb">
         <nav aria-label="breadcrumb">
@@ -18,7 +18,13 @@
 <!-- show users table -->
 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                         <div class="card">
-                            <h5 class="card-header">Users Tabel</h5>
+                            <div class="card-head">
+                                <h5 class="card-header">Users Tabel</h5>
+                                <?php if($user->u_level == 'Administrator'):?>
+                                    <a href="<?=base_url()?>users/add" class="btn btn-brand btn-table">Add User</a>
+                                <?php endif?>
+                            </div>
+                            
                             <div class="card-body">
 
                                 <?php if(is_array($users)): // if there is users ?>
@@ -51,8 +57,8 @@
                                                 <td>
                                                     <a href="<?=base_url()?>users/info/<?=$usr->u_id?>"><span class="badge badge-info">Info</span></a>
                                                 <?php if($user->u_level == 'Administrator'):?>
-                                                        <a href="<?=base_url()?>users/update/<?=$usr->u_id?>"><span class="badge badge-success">Info</span></a>
-                                                        <a href="<?=base_url()?>users/delete/<?=$usr->u_id?>"><span class="badge badge-secondary">Info</span></a>
+                                                        <a href="<?=base_url()?>users/update/<?=$usr->u_id?>"><span class="badge badge-success">update</span></a>
+                                                        <a href="<?=base_url()?>users/delete/<?=$usr->u_id?>"><span class="badge badge-secondary">delete</span></a>
                                                 <?php endif?>
                                                 </td>
                                                 </tr> <!-- end row -->

@@ -36,7 +36,7 @@
 
 	                                <!--<img src="assets/images/avatar-1.jpg" alt="User Avatar" class="rounded-circle user-avatar-xxl">-->
 	                                <?php if(!empty($info_user->u_img) && file_exists(UP_IMG.$info_user->u_img)):?>
-                                            <img src="<?=base_url()?>assets/images/<?=$user->u_img?>" alt="User Avatar" class="rounded-circle user-avatar-xxl">
+                                            <img src="<?=base_url()?>assets/images/<?=$info_user->u_img?>" alt="User Avatar" class="rounded-circle user-avatar-xxl">
                                         <?php else:?>
                                             <img src="<?=base_url()?>assets/images/avatar.svg" alt="User Avatar" class="rounded-circle user-avatar-xxl">
                                         <?php endif?>

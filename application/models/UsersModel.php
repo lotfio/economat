@@ -81,4 +81,68 @@ class UsersModel extends CI_Model
        }
        return false;
    }
+
+   /**
+	 * @param  int $id user id
+	 * @return void
+	 */
+	public function updateUser($id)
+	{
+		$data = [ // data to be updated
+					'u_name'  => $this->security->xss_clean($this->input->post('u_name')),
+					'u_email' => $this->security->xss_clean($this->input->post('u_email')),
+					'u_phone' => $this->security->xss_clean($this->input->post('u_phone'))
+				];
+
+				if(strtolower($this->session->logged->u_level) == 'administrator') // if administrator change level
+				{
+					$data['u_level'] = $this->security->xss_clean($this->input->post('u_level'));
+				}
+
+				// if user want to update image 
+				if(!empty($_FILES['u_img']['name'])) // if image set update image
+				{
+					$config['upload_path']   = UP_IMG;
+					$config['allowed_types'] = 'gif|jpg|png|jpeg';
+					$config['max_size']      = '2000';
+					$config['encrypt_name']  = TRUE;
+
+					$this->load->library('upload', $config);
+					$this->upload->initialize($config);
+
+			        if ( !$this->upload->do_upload("u_img"))
+				        {
+				                //and redirect to login page with flashdata invalid msg
+						        $this->session->set_flashdata('error', $this->upload->display_errors());
+						        return redirect(base_url().'users/update/'.$id);  
+				        }
+				        else
+				        {
+
+				                $up = (object) $this->upload->data();
+
+				                $data['u_img'] = $up->file_name;
+
+								$this->db->where('u_id', $id);
+								
+								if($this->db->update('users', $data))
+								{
+									$this->session->set_flashdata('success', "Profile Updated successfully");
+								    return redirect(base_url().'users/update/'.$id);
+								}
+				        }
+					}
+
+
+				$this->db->where('u_id', $id);
+				
+				if($this->db->update('users', $data))
+				{
+					$this->session->set_flashdata('success', "Profile Updated successfully");
+				    return redirect(base_url().'users/update/'.$id);
+				}
+
+				$this->session->set_flashdata('error', "Error Updating Profile");
+				return redirect(base_url().'users/update/'.$id);
+	}
 }
