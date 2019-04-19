@@ -164,4 +164,80 @@ class UsersModel extends CI_Model
 		$this->session->set_flashdata('error', "Error deleting user");
 		return redirect(base_url().'users');
 	}
+
+	/**
+	 * add user method
+	 */
+	public function addUser()
+	{
+		$this->load->library("form_validation");
+
+		$this->form_validation->set_rules('u_name', 'Username', 'trim|required|min_length[4]');
+		$this->form_validation->set_rules('u_email', 'Email',    'trim|required|valid_email');
+		$this->form_validation->set_rules('u_pass', 'Password', 'trim|required|min_length[6]');
+		$this->form_validation->set_rules('uc_pass', 'Confirm Password', 'trim|required|matches[u_pass]');
+		$this->form_validation->set_rules('u_level', 'Permissions',    'trim|required');
+
+		$data = [ // data to be updated
+					'u_name'  => $this->security->xss_clean($this->input->post('u_name')),
+					'u_email' => $this->security->xss_clean($this->input->post('u_email')),
+					'u_phone' => $this->security->xss_clean($this->input->post('u_phone')),
+					'u_passwd'  => SHA1($this->security->xss_clean($this->input->post('u_pass'))),
+					'u_level'  => $this->security->xss_clean($this->input->post('u_level'))
+				];
+
+		if ($this->form_validation->run() == FALSE)
+        {
+
+			$this->session->set_flashdata('error', $this->form_validation->error_array());
+			return redirect(base_url().'users/add'); 
+        }
+        else
+        {
+
+        	// if user want to update image 
+			if(!empty($_FILES['u_img']['name'])) // if image set update image
+			{
+				$config['upload_path']   = UP_IMG;
+				$config['allowed_types'] = 'gif|jpg|png|jpeg';
+				$config['max_size']      = '2000';
+				$config['encrypt_name']  = TRUE;
+
+				$this->load->library('upload', $config);
+				$this->upload->initialize($config);
+
+		        if (!$this->upload->do_upload("u_img"))
+			        {
+			                //and redirect to login page with flashdata invalid msg
+					        $this->session->set_flashdata('error', $this->upload->display_errors());
+					        return redirect(base_url().'users/add');  
+			        }
+			        else
+			        {
+
+			                $up = (object) $this->upload->data();
+
+			                $data['u_img'] = $up->file_name;
+
+							
+							if($this->db->insert('users', $data))
+							{
+
+								$this->session->set_flashdata('success', "User added successfully");
+							    return redirect(base_url().'users/add');
+							}
+			        }
+				}
+
+				if($this->db->insert('users', $data))
+				{
+					$this->session->set_flashdata('success', "User added successfully");
+				    return redirect(base_url().'users/add');
+				}
+
+				$this->session->set_flashdata('error', "Error Adding User");
+				return redirect(base_url().'users/add');
+        	
+        }
+	}
 }

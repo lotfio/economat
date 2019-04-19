@@ -181,4 +181,25 @@ class Users extends CI_Controller
 		return show_404();
 	}
 
+
+	public function performadd()
+	{
+		$data['user']  = $this->session->logged;
+
+		if(strtolower($data['user']->u_level) == 'administrator') // only admins
+		{
+
+			if($this->input->post("add"))
+			{
+
+				return $this->UsersModel->addUser();
+
+			}
+			
+			return show_404();
+		}
+
+		return show_404();
+	}
+
 }
