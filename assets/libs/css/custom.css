@@ -51,7 +51,10 @@
 .btn-table{
     margin: 8px;
 }
-.pointer
-{
+.pointer{
     cursor: pointer;
+}
+
+.dropdown-item.active, .dropdown-item:active{
+    background-color: #e8e8f1;
 }
