@@ -13,9 +13,8 @@ class ServicesModel extends CI_Model
 	 * count services method
 	 * @return int count
 	 */
-	public function countUsers() 
+	public function countServices() 
 	{
-
        return $this->db->count_all("services");
     }
 

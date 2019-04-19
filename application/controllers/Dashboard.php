@@ -9,6 +9,7 @@ class Dashboard extends CI_Controller {
 		if($this->session->userdata('logged') == FALSE) redirect('login');
 		$this->load->model('DashboardModel');
 		$this->load->model('UsersModel');
+		$this->load->model('ServicesModel');
 	}
 
 
@@ -22,6 +23,7 @@ class Dashboard extends CI_Controller {
 		$data['user'] = $this->session->logged;
 
 		$data['countUsers'] = $this->UsersModel->countUsers();
+		$data['countServices'] = $this->ServicesModel->countServices();
 
 		$this->load->view('template/header', $data);
 		$this->load->view('template/navbar', $data);
