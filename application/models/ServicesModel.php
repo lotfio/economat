@@ -31,7 +31,7 @@ class ServicesModel extends CI_Model
 		$this->db->from("services");
 		$this->db->where("s_id", $id);
 		$res = $this->db->get();
-		return ($res->num_rows() == 1) ? TRUE : FALSE;
+		return ($res->num_rows() == 1) ? $res->row() : FALSE;
 	}
 
 
@@ -81,6 +81,36 @@ class ServicesModel extends CI_Model
 	}
 
 
+	/**
+	 * edit service model
+	 * @param  int $id
+	 * @return void
+	 */
+	public function editService($id)
+	{
+		$data = [ // data to be updated
+			's_name'  => $this->security->xss_clean($this->input->post('s_name')),
+			's_description' => $this->security->xss_clean($this->input->post('s_description')),
+		];
+
+		$this->db->where('s_id', $id);
+		
+		if($this->db->update('services', $data))
+		{
+			$this->session->set_flashdata('success', "Service Updated successfully");
+		    return redirect(base_url().'services/edit/'.$id);
+		}
+
+		$this->session->set_flashdata('error', "Error Updating Service");
+		return redirect(base_url().'services/edit/'.$id);
+	}
+
+
+	/**
+	 * delete service method
+	 * @param  int $id 
+	 * @return void
+	 */
 	public function deleteService($id)
 	{
 	    // no need to check since we did chek on the controller
