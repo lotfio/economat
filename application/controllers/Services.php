@@ -6,9 +6,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  */
 class Services extends CI_Controller
 {
+	public function __construct()
+	{
+		parent::__construct();
+		$this->load->model('ServicesModel');
+
+	}
+
 	public function index()
 	{
-		$this->load->model('ServicesModel');
 
 		$data['title'] = "SERVICES";
 		$data['user'] = $this->session->logged;
@@ -48,15 +54,35 @@ class Services extends CI_Controller
 	public function proceedadd()
 	{
 		$data['user'] = $this->session->logged;
+
 		if((strtolower($data['user']->u_level) == 'administrator') OR (strtolower($data['user']->u_level) == 'editor')) // only admins and editors
 		{
 			if($this->input->post('add'))
 			{
-				$this->load->model('ServicesModel');
 				return $this->ServicesModel->addService();
 			}
 
 			return show_404();
+		}
+
+		return show_404();
+	}
+
+	/**
+	 * delete service method
+	 * 
+	 * @param  int $id
+	 * @return void
+	 */
+	public function delete($id = null)
+	{
+		$data['user'] = $this->session->logged;
+
+		if((strtolower($data['user']->u_level) == 'administrator') OR (strtolower($data['user']->u_level) == 'editor')) // only admins and editors
+		{
+			$id = (int) $id;
+
+			return $this->ServicesModel->deleteService($id);
 		}
 
 		return show_404();

@@ -1,3 +1,19 @@
+<div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header"></div>
+            <div class="modal-body">
+                Are You Sure You want to delete This Service
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-dark" data-dismiss="modal">Cancel</button>
+                <a class="btn btn-secondary btn-ok">Delete</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <div class="dashboard-wrapper">
 <div class="container-fluid dashboard-content">
     
@@ -25,10 +41,23 @@
 <?php endif ?>
 
 
+<!-- show error messages if the form validation fails -->
+<?php if ($this->session->flashdata('error')) { ?>
+    <div class="alert alert-danger">
+        <?=$this->session->flashdata('error'); ?>
+    </div>
+<?php } ?>
+
+<?php if ($this->session->flashdata('success')) { ?>
+    <div class="alert alert-success">
+        <?=$this->session->flashdata('success'); ?>
+    </div>
+<?php } ?>
+
 <div class="row"> <!-- services row holder -->
 
 <?php if($services):?>
-	
+
 	<?php foreach($services as $srv):?>
 	<div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 col-12">
         <div class="card">
@@ -43,7 +72,8 @@
 	                        <!-- item-->
 	                        <a href="<?=base_url()?>services/edit/<?=$srv->s_id?>" class="dropdown-item text-info"><i class="fa fa-fw fa-edit text-info"></i> Edit</a>
 	                        <!-- item-->
-	                        <a href="<?=base_url()?>services/delete/<?=$srv->s_id?>" class="dropdown-item text-danger"><i class="fa fa-fw fa-trash text-danger"></i> Delete</a>
+	                        <a href="#" data-href="<?=base_url()?>services/delete/<?=$srv->s_id?>" class="dropdown-item text-danger" 
+	                        data-toggle="modal" data-target="#confirm-delete"><i class="fa fa-fw fa-trash text-danger"></i> Delete</a>
 	                    </div>
 	                </div>
 	            </div>
@@ -57,6 +87,12 @@
     </div>
 	<?php endforeach?>
 
+<?php else: ?>
+	<div class="col-md-12">
+		<div class="alert alert-warning" role="alert">
+		    No Services Were Found !
+		</div>
+	</div>
 <?php endif ?>
 </div> <!-- end of services row -->
 

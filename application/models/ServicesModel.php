@@ -18,6 +18,22 @@ class ServicesModel extends CI_Model
        return $this->db->count_all("services");
     }
 
+    /**
+     * get service by id
+     * @param  integer $id 
+     * @return bool
+     */
+	public function getById($id = 0)
+	{
+		$id = (int) $id;
+
+		$this->db->select("*");
+		$this->db->from("services");
+		$this->db->where("s_id", $id);
+		$res = $this->db->get();
+		return ($res->num_rows() == 1) ? TRUE : FALSE;
+	}
+
 
 	public function getAll()
 	{
@@ -62,5 +78,19 @@ class ServicesModel extends CI_Model
 			$this->session->set_flashdata('error', "Error Adding Service");
 			return redirect(base_url().'services/add');
         }
+	}
+
+
+	public function deleteService($id)
+	{
+	    // no need to check since we did chek on the controller
+		if($this->db->delete('services', array('s_id' => $id)))
+		{
+			$this->session->set_flashdata('success', "Service Deleted successfully");
+			return redirect(base_url().'services');
+		}
+
+		$this->session->set_flashdata('error', "Error deleting Service");
+		return redirect(base_url().'services');
 	}
 }
