@@ -20,6 +20,10 @@
 
                             <li class="nav-item ">
                                 <a class="nav-link <?=$this->uri->segment(1) == 'users'? 'active' :''?> " href="<?=base_url()?>users"><i class="fa fa-fw fa-users"></i>Users</a>
+                            </li>                            
+
+                            <li class="nav-item ">
+                                <a class="nav-link <?=$this->uri->segment(1) == 'services'? 'active' :''?> " href="<?=base_url()?>services"><i class="fa fa-fw fa-hand-holding-usd"></i>Services</a>
                             </li>
 
                              <li class="nav-item ">
