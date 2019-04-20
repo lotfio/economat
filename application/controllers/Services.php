@@ -9,6 +9,7 @@ class Services extends CI_Controller
 	public function __construct()
 	{
 		parent::__construct();
+		if($this->session->userdata('logged') == FALSE) redirect('login');
 		$this->load->model('ServicesModel');
 
 	}

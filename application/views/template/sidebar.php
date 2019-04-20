@@ -27,7 +27,7 @@
                             </li>
 
                              <li class="nav-item ">
-                                <a class="nav-link <?=$this->uri->segment(1) == 'command'? 'active' :''?> " href="<?=base_url()?>command"><i class="fa fa-fw fa-users"></i>Command</a>
+                                <a class="nav-link <?=$this->uri->segment(1) == 'commands'? 'active' :''?> " href="<?=base_url()?>commands"><i class="fa fa-fw fa-users"></i>Commands</a>
                             </li>
                         </ul>
                     </div>
